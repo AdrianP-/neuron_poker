@@ -196,7 +196,7 @@ class HoldemTable(Env):
         self.acting_agent = self.player_cycle.idx
         if self._agent_is_autoplay():
             while self._agent_is_autoplay() and not self.done:
-                log.debug("Autoplay agent. Call action method of agent.")
+                # log.debug("Autoplay agent. Call action method of agent.")
                 self._get_environment()
                 # call agent's action method
                 action = self.current_player.agent_obj.action(self.legal_moves, self.observation, self.info)
@@ -218,7 +218,7 @@ class HoldemTable(Env):
                     self.first_action_for_hand[self.acting_agent] = False
                     self._calculate_reward(action)
 
-            log.info(f"Previous action reward for seat {self.acting_agent}: {self.reward}")
+            # log.info(f"Previous action reward for seat {self.acting_agent}: {self.reward}")
         return self.array_everything, self.reward, self.done, self.info
 
     def _execute_step(self, action):
@@ -233,7 +233,7 @@ class HoldemTable(Env):
         self._get_environment()
 
     def _illegal_move(self, action):
-        log.warning(f"{action} is an Illegal move, try again. Currently allowed: {self.legal_moves}")
+        # log.warning(f"{action} is an Illegal move, try again. Currently allowed: {self.legal_moves}")
         self.reward = self.illegal_move_reward
 
     def _agent_is_autoplay(self, idx=None):
@@ -306,7 +306,7 @@ class HoldemTable(Env):
         if self.done:
             won = 1 if not self._agent_is_autoplay(idx=self.winner_ix) else -1
             self.reward = self.initial_stacks * len(self.players) * won
-            log.debug(f"Keras-rl agent has reward {self.reward}")
+            # log.debug(f"Keras-rl agent has reward {self.reward}")
 
         elif len(self.funds_history) > 1:
             self.reward = self.funds_history.iloc[-1, self.acting_agent] - self.funds_history.iloc[
