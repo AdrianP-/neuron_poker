@@ -266,8 +266,7 @@ class HoldemTable(Env):
             self.current_player = self.players[self.winner_ix]
 
         self.player_data.position = self.current_player.seat
-        self.current_player.equity_alive = self.get_equity(set(self.current_player.cards), set(self.table_cards),
-                                                           sum(self.player_cycle.alive), 10)
+        self.current_player.equity_alive = self.get_equity(set(self.current_player.cards), set(self.table_cards), sum(self.player_cycle.alive), 1500)
         self.player_data.equity_to_river_alive = self.current_player.equity_alive
 
         arr1 = np.array(list(flatten(self.player_data.__dict__.values())))
